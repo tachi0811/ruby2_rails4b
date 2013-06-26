@@ -5,6 +5,13 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @posts = Post.all
+
+    @post_search = PostSearch.new params[:post_search]
+    if @post_search.title.present?
+      # 条件を追加できる
+      @posts = @posts.s_title @post_search.title
+    end
+
   end
 
   # GET /posts/1
