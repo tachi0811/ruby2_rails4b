@@ -7,9 +7,15 @@ class PostsController < ApplicationController
     @posts = Post.all
 
     @post_search = PostSearch.new params[:post_search]
+    # 検索条件 title
     if @post_search.title.present?
       # 条件を追加できる
       @posts = @posts.s_title @post_search.title
+    end
+
+    #検索条件 body
+    if @post_search.body.present?
+        @posts = @posts.s_body @post_search.body
     end
 
   end
